@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Surpresa para Enzo 💖</title>
+  <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;700&display=swap" rel="stylesheet">
+  <style>
+    body, html {
+      margin: 0;
+      padding: 0;
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+      background: radial-gradient(circle at top, #ffe6ec, #ffd9e6);
+      font-family: 'Quicksand', sans-serif;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    #overlay {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      overflow: hidden;
+    }
+    .floating {
+      position: absolute;
+      pointer-events: none;
+      animation-duration: var(--duration);
+      animation-delay: var(--delay);
+      animation-name: floatUp;
+      animation-iteration-count: infinite;
+      opacity: 0;
+    }
+    @keyframes floatUp {
+      0% { transform: translateY(100vh) rotate(var(--rot)); opacity: 0; }
+      10% { opacity: 0.7; }
+      100% { transform: translateY(-10vh) rotate(var(--rot)); opacity: 0; }
+    }
+    #content {
+      background: rgba(255,255,255,0.9);
+      border-radius: 20px;
+      padding: 30px;
+      max-width: 700px;
+      text-align: center;
+      box-shadow: 0 0 30px rgba(0,0,0,0.2);
+      transform: scale(0.8);
+      opacity: 0;
+      transition: transform 1s ease, opacity 1s ease;
+    }
+    #content.show {
+      transform: scale(1);
+      opacity: 1;
+    }
+    h1 { color: #d6336c; }
+    p { color: #333; line-height: 1.5; margin-bottom: 15px; }
+    .btn {
+      background: #d6336c;
+      border: none;
+      padding: 12px 25px;
+      font-size: 1em;
+      color: white;
+      border-radius: 30px;
+      cursor: pointer;
+      transition: background 0.3s;
+    }
+    .btn:hover {
+      background: #a91e4f;
+    }
+    .gif-area {
+      margin: 20px 0;
+    }
+    .gif-area img {
+      max-width: 150px;
+      margin: 5px;
+    }
+  </style>
+</head>
+<body>
+
+  <div id="overlay"></div>
+
+  <div id="content">
+    <h1>💖 Feliz Dia dos Namorados, Enzo!</h1>
+    <div class="gif-area">
+      <img src="https://media.giphy.com/media/QvBoMEcQ7DQXK/giphy.gif" alt="Coração flutuante">
+      <img src="https://media.giphy.com/media/l0HlvtIPzPdt2usKs/giphy.gif" alt="Beijo voando">
+      <img src="https://media.giphy.com/media/3oEjI6SIIHBdRxXI40/giphy.gif" alt="Buquê de flores">
+    </div>
+    <p>Depois de tudo que vivemos, eu só posso dizer o quanto sou grata por ter você na minha vida. Você chegou de um jeito leve, mas foi ficando com uma presença que me faz bem de verdade.</p>
+    <p>Não é sempre fácil colocar em palavras o que sinto, mas quero que saiba que você é importante pra mim — mais do que talvez eu consiga expressar. Seu carinho, sua paciência, o jeito como me escuta e me acolhe... tudo isso me faz ver que tem algo bonito nascendo aqui.</p>
+    <p>A cada dia, descubro mais sobre você — e gosto do que encontro. A sua companhia me traz paz, e a nossa conexão me faz sorrir mesmo nos dias difíceis.</p>
+    <p>Ainda estamos construindo algo, passo a passo. Mas estou feliz por estar trilhando esse caminho com você.</p>
+    <p>Obrigada por ser tão especial. Hoje é o nosso primeiro Dia dos Namorados juntos — e, se depender de mim, o primeiro de muitos.</p>
+    <p><strong>Com carinho, Brenda</strong></p>
+    <button class="btn" id="startBtn">Abra a surpresa 💌</button>
+  </div>
+
+  <script>
+    const overlay = document.getElementById('overlay');
+    const content = document.getElementById('content');
+    const btn = document.getElementById('startBtn');
+
+    function spawnFloating() {
+      const emo = ['❤️','💖','💋','🌹','🌸'];
+      for(let i=0; i<40; i++){
+        const el = document.createElement('div');
+        const emoji = emo[Math.floor(Math.random()*emo.length)];
+        el.textContent = emoji;
+        el.className = 'floating';
+        el.style.setProperty('--duration', `${4 + Math.random()*3}s`);
+        el.style.setProperty('--delay', `${Math.random()*3}s`);
+        el.style.setProperty('--rot', `${Math.random()*360}deg`);
+        el.style.left = Math.random()*100 + 'vw';
+        el.style.fontSize = `${20 + Math.random()*30}px`;
+        overlay.appendChild(el);
+      }
+    }
+
+    btn.addEventListener('click', () => {
+      btn.style.display = 'none';
+      spawnFloating();
+      content.classList.add('show');
+    });
+  </script>
+
+</body>
+</html>
